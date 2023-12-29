@@ -1,0 +1,61 @@
+﻿@model Crud.Models.PuntoriDepartamentiViewModel    
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Puntoris" asp-action="Index" method="get">
+    <p>
+        <select  asp-for="DepartamentiFilter" asp-items="Model.Departamenti">
+            <option value="">All</option>
+        </select>
+
+
+        <label for="SearchString">Title:</label>
+        <input type="text" id="SearchString" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+       <p>Number of items in Model.Puntoret: @Model.Puntoret?.Count</p>
+
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Puntoret![0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puntoret![0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puntoret![0].Departament)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Puntoret!) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departament)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
